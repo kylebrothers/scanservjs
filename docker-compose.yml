@@ -12,6 +12,7 @@ services:
     devices:
       # You'll need to replace 001/003 with your actual USB bus/device numbers
       # Find these using: sudo sane-find-scanner -q
+      # And need to change permissions so it is accessible: chmod a+rw /dev/bus/usb/001/003
       - /dev/bus/usb/001/003:/dev/bus/usb/001/003
     # Add device group rule for USB access
     device_cgroup_rules:
