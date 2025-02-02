@@ -2,6 +2,11 @@ services:
   scanservjs:
     build: .
     container_name: scanservjs-container
+    privileged: true
+    environment:
+      - SANE_USB_WORKAROUND=1
+    group_add:
+      - lp
     ports:
       - "8081:8080"
     volumes:
@@ -12,7 +17,6 @@ services:
     devices:
       # You'll need to replace 001/003 with your actual USB bus/device numbers
       # Find these using: sudo sane-find-scanner -q
-      # And need to change permissions so it is accessible: chmod a+rw /dev/bus/usb/001/003
       - /dev/bus/usb/001/003:/dev/bus/usb/001/003
     # Add device group rule for USB access
     device_cgroup_rules:
