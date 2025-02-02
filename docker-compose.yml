@@ -1,4 +1,6 @@
+# docker-compose.yml
 version: "3"
+
 services:
   scanservjs:
     image: sbs20/scanservjs:latest
@@ -6,8 +8,8 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./scans:/var/lib/scanservjs/output
-      - ./config:/etc/scanservjs
+      - scanservjs_output:/var/lib/scanservjs/output
+      - scanservjs_config:/etc/scanservjs
       - /var/run/dbus:/var/run/dbus
     devices:
       # You'll need to replace 001/003 with your actual USB bus/device numbers
@@ -17,3 +19,15 @@ services:
     device_cgroup_rules:
       - 'c 189:* rmw'
     restart: unless-stopped
+
+volumes:
+  scanservjs_output:
+    driver_opts:
+      type: nfs
+      device: ":/Docker/scanservjs/output"
+      o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
+  scanservjs_config:
+    driver_opts:
+      type: nfs
+      device: ":/Docker/scanservjs/config"
+      o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
