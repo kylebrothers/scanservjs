@@ -1,24 +1,24 @@
+version: '3.8'
+
 services:
   scanservjs:
     build: .
     container_name: scanservjs-container
-    privileged: true
+    privileged: true  # Kept as requested
     environment:
       - SANE_USB_WORKAROUND=1
+      - USB_DEVICE_PATH=${USB_DEVICE_PATH:-001/003}  # Default USB device path
     group_add:
       - lp
     ports:
-      - "8081:8080"
+      - "${HOST_PORT:-8081}:8080"  # Dynamic host port with default value 8081
     volumes:
       - scanservjs_output:/var/lib/scanservjs/output
       - scanservjs_config:/etc/scanservjs
       - rclone_config:/var/lib/scanservjs/.config/rclone
       - /var/run/dbus:/var/run/dbus
     devices:
-      # You'll need to replace 001/003 with your actual USB bus/device numbers
-      # Find these using: sudo sane-find-scanner -q
-      - /dev/bus/usb/001/003:/dev/bus/usb/001/003
-    # Add device group rule for USB access
+      - /dev/bus/usb/${USB_DEVICE_PATH}:/dev/bus/usb/${USB_DEVICE_PATH}  # Dynamic USB device path
     device_cgroup_rules:
       - 'c 189:* rmw'
     restart: unless-stopped
