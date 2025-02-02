@@ -1,12 +1,9 @@
-# docker-compose.yml
-version: "3"
-
 services:
   scanservjs:
-    image: sbs20/scanservjs:latest
+    build: .
     container_name: scanservjs-container
     ports:
-      - "8081:8080"
+      - "8080:8080"
     volumes:
       - scanservjs_output:/var/lib/scanservjs/output
       - scanservjs_config:/etc/scanservjs
@@ -25,17 +22,15 @@ volumes:
   scanservjs_output:
     driver_opts:
       type: nfs
-      device: ":/Docker/scanservjs/output"
+      device: ":/Docker/Scanservjs/output"
       o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
   scanservjs_config:
     driver_opts:
       type: nfs
-      device: ":/Docker/scanservjs/config"
+      device: ":/Docker/Scanservjs/config"
       o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
   rclone_config:
     driver_opts:
       type: nfs
-      device: ":/Docker/scanservjs/rclone"
+      device: ":/Docker/Scanservjs/rclone"
       o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
-
-# Makefile remains the same as before
