@@ -15,7 +15,7 @@ services:
     volumes:
       - scanservjs_output:/var/lib/scanservjs/output
       - scanservjs_config:/etc/scanservjs
-      - rclone_config:/var/lib/scanservjs/.config/rclone
+      - rclone_config:/root/.config/rclone
       - /var/run/dbus:/var/run/dbus
     devices:
       - /dev/bus/usb/${USB_DEVICE_PATH}:/dev/bus/usb/${USB_DEVICE_PATH}  # Dynamic USB device path
