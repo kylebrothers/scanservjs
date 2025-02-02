@@ -10,6 +10,7 @@ services:
     volumes:
       - scanservjs_output:/var/lib/scanservjs/output
       - scanservjs_config:/etc/scanservjs
+      - rclone_config:/var/lib/scanservjs/.config/rclone
       - /var/run/dbus:/var/run/dbus
     devices:
       # You'll need to replace 001/003 with your actual USB bus/device numbers
@@ -31,3 +32,10 @@ volumes:
       type: nfs
       device: ":/Docker/scanservjs/config"
       o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
+  rclone_config:
+    driver_opts:
+      type: nfs
+      device: ":/Docker/scanservjs/rclone"
+      o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
+
+# Makefile remains the same as before
