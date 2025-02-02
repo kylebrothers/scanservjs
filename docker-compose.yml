@@ -22,15 +22,15 @@ volumes:
   scanservjs_output:
     driver_opts:
       type: nfs
-      device: ":/Docker/Scanservjs/output"
+      device: ":/Docker/scanservjs/output"
       o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
   scanservjs_config:
     driver_opts:
       type: nfs
-      device: ":/Docker/Scanservjs/config"
+      device: ":/Docker/scanservjs/config"
       o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
   rclone_config:
     driver_opts:
       type: nfs
-      device: ":/Docker/Scanservjs/rclone"
+      device: ":/Docker/scanservjs/rclone"
       o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
