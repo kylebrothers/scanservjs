@@ -22,15 +22,19 @@ down:
 up-all:
 	@echo "Found env files: $(ENV_FILES)"
 	@for env_file in $(ENV_FILES); do \
-		echo "Starting instance with $$env_file"; \
-		sudo docker compose --env-file $$env_file up -d; \
+		instance=$$(basename $$env_file .env); \
+		instance=$${instance#.}; \
+		echo "Starting instance $$instance with $$env_file"; \
+		sudo docker compose --project-name $$instance --env-file $$env_file up -d; \
 	done
 
 # Stop all instances
 down-all:
 	@for env_file in $(ENV_FILES); do \
-		echo "Stopping instance with $$env_file"; \
-		sudo docker compose --env-file $$env_file down; \
+		instance=$$(basename $$env_file .env); \
+		instance=$${instance#.}; \
+		echo "Stopping instance $$instance with $$env_file"; \
+		sudo docker compose --project-name $$instance --env-file $$env_file down; \
 	done
 
 # Restart all instances
