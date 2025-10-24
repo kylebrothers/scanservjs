@@ -25,19 +25,19 @@ services:
 
 volumes:
   scanservjs_output:
-    name: scanservjs_output
+    # name: scanservjs_output  # Remove this line
     driver_opts:
       type: nfs
       device: ":/Docker/scanservjs/output"
       o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
   scanservjs_config:
-    name: scanservjs_config
+    # name: scanservjs_config  # Remove this line
     driver_opts:
       type: nfs
       device: ":/Docker/scanservjs/config"
       o: nfsvers=4,addr=192.168.0.134,nolock,soft,rw
   rclone_config:
-    name: rclone_config
+    # name: rclone_config  # Remove this line
     driver_opts:
       type: nfs
       device: ":/Docker/scanservjs/rclone"
