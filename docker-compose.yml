@@ -18,7 +18,7 @@ services:
       - rclone_config:/root/.config/rclone
       - /var/run/dbus:/var/run/dbus
     devices:
-      - /dev/bus/usb/${USB_DEVICE_PATH}:/dev/bus/usb/${USB_DEVICE_PATH}  # Dynamic USB device path
+      - /dev/bus/usb/001:/dev/bus/usb/001
     device_cgroup_rules:
       - 'c 189:* rmw'
     restart: unless-stopped
